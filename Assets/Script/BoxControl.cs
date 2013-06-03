@@ -37,40 +37,44 @@ public class BoxControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        switch (this.currentBoxState)
+        if (GameManager.master.currentGameState == GameManager.GameState.StartGame)
         {
-            case BoxState.NotRelease:
-                if (Input.GetKeyUp(KeyCode.A))
-                {
-                    this.currentBoxState = BoxState.Release;
-                    iTween.StopByName("MoveBox");
-
-                    this.rigidbody.isKinematic = false;
-                    this.rigidbody.velocity = Vector3.zero;
-                }
-                break;
-
-            case BoxState.Release:
-                if (this.isGround())
-                {
-                    ControllerCamera.master.MoveCameraToTop(this.gameObject);
-                    BoxCreat.master.CallCreateBox();
-                    this.currentBoxState = BoxState.TouchGround;
-                }
-                break;
-
-            case BoxState.TouchGround:
-
-                if (!this.isFirstBox)
-                {
-                    if (this.isBoxDown())
+            switch (this.currentBoxState)
+            {
+                case BoxState.NotRelease:
+                    if (Input.GetKeyUp(KeyCode.A))
                     {
-                        //偵測非第一個BOX是否碰到地面(碰到GameOver)
-                        print("GameOver");
+                        this.currentBoxState = BoxState.Release;
+                        iTween.StopByName("MoveBox");
+
+                        this.rigidbody.isKinematic = false;
+                        this.rigidbody.velocity = Vector3.zero;
                     }
-                }
-                break;
+                    break;
+
+                case BoxState.Release:
+                    if (this.isGround())
+                    {
+                        ControllerCamera.master.MoveCameraToTop(this.gameObject);
+                        BoxCreat.master.CallCreateBox();
+                        GameManager.master.CurrentLayerCount++;
+                        this.currentBoxState = BoxState.TouchGround;
+                    }
+                    break;
+
+                case BoxState.TouchGround:
+
+                    if (!this.isFirstBox)
+                    {
+                        if (this.isBoxDown())
+                        {
+                            //偵測非第一個BOX是否碰到地面(碰到GameOver)
+                            print("GameOver");
+                            GameManager.master.currentGameState = GameManager.GameState.GameOver;
+                        }
+                    }
+                    break;
+            }
         }
     }
 

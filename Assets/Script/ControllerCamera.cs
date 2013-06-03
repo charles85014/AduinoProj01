@@ -5,7 +5,6 @@ public class ControllerCamera : MonoBehaviour
 {
     public static ControllerCamera master;
 
-    public bool isTest = false;
     public float Yoffset;
     public float time;
 
@@ -20,11 +19,5 @@ public class ControllerCamera : MonoBehaviour
                 "y", obj.transform.position.y + this.Yoffset,
                 "time", this.time
                 ));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

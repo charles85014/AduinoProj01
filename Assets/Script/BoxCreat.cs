@@ -6,7 +6,6 @@ public class BoxCreat : MonoBehaviour
     public static BoxCreat master;
 
     public GameObject Box;
-    public bool BoxCanCreate = true;
 
     public float ColdDownTime;
 
@@ -30,16 +29,6 @@ public class BoxCreat : MonoBehaviour
     {
         yield return new WaitForSeconds(ColdDownTime);
         GameObject obj = (GameObject)Instantiate(this.Box, this.transform.position, this.Box.transform.rotation);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //if (this.BoxCanCreate)
-        //{
-        //    GameObject obj = (GameObject)Instantiate(this.Box, this.transform.position, this.Box.transform.rotation);
-        //    this.BoxCanCreate = false;
-        //}
     }
 
     void OnDrawGizmos()
