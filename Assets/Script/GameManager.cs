@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         switch (this.currentGameState)
         {
             case GameState.ReadytoStart:
-                if (Input.GetKeyUp(KeyCode.A))
+                if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     this.currentGameState = GameState.StartGame;
                     BoxCreat.master.enabled = true;
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.GameOver:
-                if (Input.GetKeyUp(KeyCode.A))
+                if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     iTween.Stop();
                     Application.LoadLevel(Application.loadedLevelName);

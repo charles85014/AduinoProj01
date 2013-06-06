@@ -42,7 +42,7 @@ public class BoxControl : MonoBehaviour
             switch (this.currentBoxState)
             {
                 case BoxState.NotRelease:
-                    if (Input.GetKeyUp(KeyCode.A))
+                    if (Input.GetKeyUp(KeyCode.A)||Input.GetKeyDown(KeyCode.Mouse0))
                     {
                         this.currentBoxState = BoxState.Release;
                         iTween.StopByName("MoveBox");
